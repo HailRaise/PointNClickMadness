@@ -1,0 +1,33 @@
+# Unity
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild*/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+UserSettings/
+
+# Visual Studio / JetBrains
+.vs/
+.vscode/
+.idea/
+*.sln
+*.csproj
+*.unityproj
+*.pidb
+*.user
+*.booproj
+*.svd
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Crash and lightmap caches
+*.stacktrace
+LightmapSnapshot/
+
+# Packages
+Packages/com.unity.package-manager/
+
