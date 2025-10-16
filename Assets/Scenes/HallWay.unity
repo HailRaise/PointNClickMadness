@@ -827,6 +827,7 @@ GameObject:
   - component: {fileID: 1764624919}
   - component: {fileID: 1764624918}
   - component: {fileID: 1764624920}
+  - component: {fileID: 1764624921}
   - component: {fileID: 1764624917}
   m_Layer: 0
   m_Name: Cursor
@@ -937,6 +938,21 @@ MonoBehaviour:
   doorCursor: {fileID: 7829212896737242494, guid: 5ae6d81b33e4144d88f54628cae68a50, type: 3}
   dragCursor: {fileID: 3849239777459309627, guid: e91ca7b0e869047e99ae9e270899331e, type: 3}
   KitchenScene: Kitchen
+--- !u!114 &1764624921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764624916}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94cc8cf9c26cd4bf3b28d6f7442541bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CursorClickInteraction
+  KitchenScene: Kitchen
+  player: {fileID: 1764624919}
+  kitchenPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1959198670
 GameObject:
   m_ObjectHideFlags: 0
