@@ -69,4 +69,19 @@ public class PlayerTopDown : MonoBehaviour
         Debug.Log("After flip, player scale: " + transform.localScale);
         transform.localScale = playerScale;
     }
+    private static bool playerExists = false;
+
+    void Awake()
+    {
+        if (playerExists)
+        {
+            Destroy(gameObject);  // destroy any extra player copies
+            return;
+        }
+
+        playerExists = true;
+        DontDestroyOnLoad(gameObject);
+    }
+
+
 }

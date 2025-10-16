@@ -1440,6 +1440,8 @@ GameObject:
   - component: {fileID: 547380149}
   - component: {fileID: 547380148}
   - component: {fileID: 547380151}
+  - component: {fileID: 547380157}
+  - component: {fileID: 547380156}
   - component: {fileID: 547380150}
   - component: {fileID: 547380152}
   - component: {fileID: 547380155}
@@ -1644,6 +1646,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86beab36085c84d19b853a85c54224c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScenePersist
+--- !u!114 &547380156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547380147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68ae77da233a6349a4447ebafefb524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerRenderControl
+--- !u!114 &547380157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547380147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5a0487cd086ecb4ab5681d8a20fcf2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSpawnManager
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0

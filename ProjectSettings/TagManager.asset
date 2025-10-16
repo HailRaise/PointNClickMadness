@@ -7,6 +7,9 @@ TagManager:
   - Clickable
   - DoorObject
   - DoorObjectKitchen
+  - Curtain
+  - Notebook
+  - PlayerSpawn
   layers:
   - Default
   - TransparentFX

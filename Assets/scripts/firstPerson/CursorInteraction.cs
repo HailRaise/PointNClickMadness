@@ -1,50 +1,86 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CursorInteraction : MonoBehaviour
 {
-    public Sprite defaultCursor;  // Default cursor
-    public Sprite doorCursor;     // Cursor to show when hovering over the doorframe
+    public Sprite defaultCursor;   // Default cursor sprite
+    public Sprite pickUpCursor;
+    public Sprite doorCursor;      // Cursor sprite when hovering over a door
+    private SpriteRenderer cursorRenderer;
+    public Sprite dragCursor; 
 
-    private SpriteRenderer cursorRenderer;  // Reference to the cursor's SpriteRenderer
+    [Header("Scene transitions")]
+    public string KitchenScene = "Kitchen"; // Scene to load
+    // You can add more scene names later for other doors
 
     void Start()
     {
-        cursorRenderer = GetComponent<SpriteRenderer>();  // Get the reference to the cursor
+        cursorRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
-        RaycastHit2D hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // Raycast from the mouse position
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
 
-        // Perform the raycast in 2D world space
-        hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-
+        // --- Hover logic ---
         if (hit.collider != null)
         {
-            // Change cursor if the mouse is over the doorframe (tagged as "DoorObject")
             if (hit.collider.CompareTag("DoorObjectKitchen"))
             {
-                cursorRenderer.sprite = doorCursor;  // Change the cursor to the "door" cursor
+                cursorRenderer.sprite = doorCursor;
+            }
+            else if (hit.collider.CompareTag("Curtain"))
+            {
+                cursorRenderer.sprite = dragCursor; // or special cursor
+            }
+            else if (hit.collider.CompareTag("Notebook"))
+            {
+                cursorRenderer.sprite = pickUpCursor;
             }
             else
             {
-                cursorRenderer.sprite = defaultCursor;  // Default cursor if not hovering over a door
+                cursorRenderer.sprite = defaultCursor;
             }
         }
         else
         {
-            cursorRenderer.sprite = defaultCursor;  // Default cursor if nothing is hit
+            cursorRenderer.sprite = defaultCursor;
         }
 
-        // Handle mouse click
-        if (Input.GetMouseButtonDown(0)) // Left click
+        // --- Click logic ---
+        if (Input.GetMouseButtonDown(0))
         {
-            if (hit.collider != null && hit.collider.CompareTag("DoorObjectKitchen"))
+            if (hit.collider == null)
+                return; // <-- prevents null reference
+
+            if (hit.collider.CompareTag("DoorObjectKitchen"))
             {
-                Debug.Log("Clicked on the Door!");
-                // Here, you can implement what happens when the player clicks on the door
-                // For example, transition to another scene or trigger an animation
+                Debug.Log("Clicked on the Door! Moving to Kitchen...");
+                SceneManager.LoadScene(KitchenScene);
+            }
+            else if (hit.collider.CompareTag("Curtain"))
+            {
+                var curtain = hit.collider.GetComponent<CurtainInteraction>();
+                if (curtain != null)
+                    curtain.Toggle();
+            }
+            else if (hit.collider.CompareTag("Notebook"))
+            {
+                  Debug.Log("NotebookPickedUp");
+
+                // Find player and add the item
+                GameObject player = GameObject.FindWithTag("Player");
+                if (player != null)
+                {
+                    var inventory = player.GetComponent<PlayerInventory>();
+                    if (inventory != null)
+                    {
+                        inventory.AddItem("Notebook");
+                    }
+                }
+
+                Destroy(hit.collider.gameObject);
             }
         }
     }
