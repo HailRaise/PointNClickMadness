@@ -21,7 +21,7 @@ public class InventoryInput : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha4)) selectedSlot = 3;
         if (Input.GetKeyDown(KeyCode.Alpha5)) selectedSlot = 4;
         // ... добавьте больше, если у вас больше ячеек ...
-
+        // Ало
         // --- Выброс предмета на клавишу G ---
         if (Input.GetKeyDown(KeyCode.G))
         {
