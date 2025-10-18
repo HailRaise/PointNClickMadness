@@ -12,20 +12,20 @@ public class OldManDialogue : MonoBehaviour
 
         // Node 0
         dialogueNodes[0] = new DialogueNode();
-        dialogueNodes[0].line = "Hello there, traveler...";
+        dialogueNodes[0].line = "ILYA PIDARAS?";
         dialogueNodes[0].choices = new DialogueChoice[]
         {
-            new DialogueChoice(){ choiceText = "Who are you?", nextNodeIndex = 1 },
-            new DialogueChoice(){ choiceText = "Goodbye.", nextNodeIndex = -1 }
+            new DialogueChoice(){ choiceText = "DA", nextNodeIndex = 1 },
+            new DialogueChoice(){ choiceText = "NET.", nextNodeIndex = -1 }
         };
 
         // Node 1
         dialogueNodes[1] = new DialogueNode();
-        dialogueNodes[1].line = "Just an old man watching over these ruins.";
+        dialogueNodes[1].line = "POCHEMMU?";
         dialogueNodes[1].choices = new DialogueChoice[]
         {
-            new DialogueChoice(){ choiceText = "Tell me more.", nextNodeIndex = 2 },
-            new DialogueChoice(){ choiceText = "I must go.", nextNodeIndex = -1 }
+            new DialogueChoice(){ choiceText = "IDET ON NAHUI", nextNodeIndex = 2 },
+            new DialogueChoice(){ choiceText = "Ladno etot", nextNodeIndex = -1 }
         };
 
         // Node 2

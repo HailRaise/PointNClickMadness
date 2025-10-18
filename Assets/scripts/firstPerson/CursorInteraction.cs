@@ -12,6 +12,7 @@ public class CursorInteraction : MonoBehaviour
     [Header("Scene transitions")]
     public string KitchenScene = "Kitchen"; // Scene to load
     public string DoorExitHallway = "ExitHallway";
+    public string FP_HouseExit = "FP_HouseExit";
     // You can add more scene names later for other doors
 
     void Start()
@@ -97,7 +98,7 @@ public class CursorInteraction : MonoBehaviour
             }
             else if (hit.collider.CompareTag("StairsDown"))
             {
-
+                    SceneManager.LoadScene(FP_HouseExit);
             }
             else if (hit.collider.CompareTag("OldMan"))
             {

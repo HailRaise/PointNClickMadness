@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 public class DialogueManager : MonoBehaviour
 {
+    [HideInInspector]
+    public bool isDialogueActive = false;
+
     public static DialogueManager Instance;
 
     [Header("UI References")]
@@ -44,7 +47,7 @@ public class DialogueManager : MonoBehaviour
             blipSound.clip = npcBlip;
         Debug.Log("Blip sound set to: " + (npcBlip != null ? npcBlip.name : "NULL"));
 
-
+        isDialogueActive = true;
         DisplayNode();
     }
 
@@ -106,5 +109,6 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueBox.SetActive(false);
         currentDialogue = null;
+        isDialogueActive = false;
     }
 }
