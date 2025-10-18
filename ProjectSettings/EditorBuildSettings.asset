@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FP_ExitHallway.unity
     guid: a5a72004a1b58274fb623c5f094fb6cc
+  - enabled: 1
+    path: Assets/Scenes/FP_HouseExit.unity
+    guid: 7613894167f13594cb40d7a415d4607c
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
