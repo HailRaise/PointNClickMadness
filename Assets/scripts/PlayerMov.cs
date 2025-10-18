@@ -7,9 +7,13 @@ public class PlayerTopDown : MonoBehaviour
     public float moveSpeed = 4f;
 
     [Header("Phone Settings")]
-    // ИЗМЕНЕНО: Ссылка на Animator телефона вместо GameObject
-    public Animator phoneAnimator; 
-    private bool isPhoneOpen = false; 
+    public Animator phoneAnimator;
+    // ДОБАВЛЕНО: Ссылка на "паспорт" телефона для проверки в инвентаре
+    public ItemData phoneItemData; 
+    
+    private bool isPhoneOpen = false;
+    // ДОБАВЛЕНО: Ссылка на менеджер инвентаря
+    private InventoryManager inventoryManager;
 
     private bool isFacingRight = true;
     private Rigidbody2D rb;
@@ -21,44 +25,35 @@ public class PlayerTopDown : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-
-        // ИЗМЕНЕНО: Строка phoneUI.SetActive(false) больше не нужна,
-        // так как аниматор сам управляет положением телефона
         
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked; 
+        // ДОБАВЛЕНО: Получаем доступ к инвентарю при старте
+        inventoryManager = InventoryManager.instance; 
+
+        //Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
     {
-        // --- ЛОГИКА ТЕЛЕФОНА ---
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        // ИЗМЕНЕНО: Используем Tab, как договаривались ранее
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             TogglePhone();
         }
 
-        // --- БЛОКИРУЕМ ДВИЖЕНИЕ, ЕСЛИ ТЕЛЕФОН ОТКРЫТ ---
         if (isPhoneOpen)
         {
-            moveInput = Vector2.zero; 
+            moveInput = Vector2.zero;
             if (animator) animator.SetBool("IsMoving", false);
             return;
         }
 
-        // --- Get movement input ---
+        // ... (остальной код движения без изменений) ...
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.y = Input.GetAxisRaw("Vertical");
         moveInput.Normalize();
-
-        // --- Determine if moving ---
         bool isMoving = moveInput.sqrMagnitude > 0.01f;
-
-        // --- Store last move direction (so idle faces last way moved) ---
-        // ВАША ЛОГИКА, КОТОРАЯ БЫЛА СОХРАНЕНА
-        if (isMoving)
-            lastMoveDir = moveInput;
-
-        // --- Update Animator parameters ---
+        if (isMoving) lastMoveDir = moveInput;
         if (animator)
         {
             animator.SetBool("IsMoving", isMoving);
@@ -69,42 +64,39 @@ public class PlayerTopDown : MonoBehaviour
 
     void TogglePhone()
     {
-        isPhoneOpen = !isPhoneOpen;
-
-        // ИЗМЕНЕНО: Управляем параметром в Аниматоре
-        if (phoneAnimator != null)
+        // ГЛАВНАЯ ПРОВЕРКА: есть ли у нас телефон?
+        if (inventoryManager != null && inventoryManager.HasItem(phoneItemData))
         {
-            phoneAnimator.SetBool("IsOpen", isPhoneOpen);
-        }
+            // Если да, выполняем всю логику анимации и блокировки курсора
+            isPhoneOpen = !isPhoneOpen;
 
-        // Показываем или прячем курсор мыши
-        Cursor.visible = isPhoneOpen;
-        
-        // Разблокируем или блокируем курсор
-        Cursor.lockState = isPhoneOpen ? CursorLockMode.None : CursorLockMode.Locked;
+            if (phoneAnimator != null)
+            {
+                phoneAnimator.SetBool("IsOpen", isPhoneOpen);
+            }
+
+            //Cursor.visible = isPhoneOpen;
+            //Cursor.lockState = isPhoneOpen ? CursorLockMode.None : CursorLockMode.Locked;
+        }
+        else
+        {
+            // Если телефона нет, ничего не делаем
+            Debug.Log("У меня нет телефона!");
+        }
     }
 
     void FixedUpdate()
     {
-        // Двигаем персонажа только если телефон НЕ открыт
         if (isPhoneOpen)
         {
-            // ВАША ЛОГИКА ОСТАНОВКИ, КОТОРАЯ БЫЛА СОХРАНЕНА
-            rb.linearVelocity = Vector2.zero; // Заменено на velocity для большей совместимости
-            return;
+            rb.linearVelocity = Vector2.zero; // Используем velocity для надежной остановки
+            return;
         }
 
-        // --- Move the player ---
         rb.MovePosition(rb.position + moveInput * moveSpeed * Time.fixedDeltaTime);
         
-        if (moveInput.x > 0.0f && isFacingRight == false)
-        {
-            Flip();
-        }
-        else if (moveInput.x < 0.0f && isFacingRight == true)
-        {
-            Flip();
-        }
+        if (moveInput.x > 0.0f && !isFacingRight) Flip();
+        else if (moveInput.x < 0.0f && isFacingRight) Flip();
     }
 
     void Flip()
