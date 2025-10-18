@@ -10,6 +10,9 @@ TagManager:
   - Curtain
   - Notebook
   - PlayerSpawn
+  - DoorToExit
+  - StairsDown
+  - OldMan
   layers:
   - Default
   - TransparentFX

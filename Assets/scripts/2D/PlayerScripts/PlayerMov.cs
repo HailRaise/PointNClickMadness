@@ -1,11 +1,11 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerTopDown : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float moveSpeed = 4f;
-
     [Header("Phone Settings")]
     // ИЗМЕНЕНО: Ссылка на Animator телефона вместо GameObject
     public Animator phoneAnimator; 
@@ -19,6 +19,8 @@ public class PlayerTopDown : MonoBehaviour
 
     void Start()
     {
+        if (SceneManager.GetActiveScene().name.Contains("HallWay"))
+        Debug.Log($"lockState={Cursor.lockState}, visible={Cursor.visible}");
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
@@ -26,16 +28,32 @@ public class PlayerTopDown : MonoBehaviour
         // так как аниматор сам управляет положением телефона
         
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked; 
+        string sceneName = SceneManager.GetActiveScene().name;
+        // bool isFirstPerson = sceneName.Contains("HallWay") || sceneName.Contains("FP");
+        // if (isFirstPerson)
+        // {
+        //     Debug.Log("Cursor Unlocked");
+        //     Cursor.lockState = CursorLockMode.None;
+        //     Cursor.visible = true;
+        // }
+        // else
+        // {
+        //     Debug.Log("Cursor locked");
+        //     Cursor.lockState = CursorLockMode.Locked;
+        //     Cursor.visible = false;
+        // }
     }
 
     void Update()
     {
+        if (SceneManager.GetActiveScene().name.Contains("HallWay"))
+        Debug.Log($"[{Time.frameCount}] lockState={Cursor.lockState}");
+
         // --- ЛОГИКА ТЕЛЕФОНА ---
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            TogglePhone();
-        }
+        // if (Input.GetKeyDown(KeyCode.UpArrow))
+        // {
+        //     TogglePhone();
+        // }
 
         // --- БЛОКИРУЕМ ДВИЖЕНИЕ, ЕСЛИ ТЕЛЕФОН ОТКРЫТ ---
         if (isPhoneOpen)
@@ -57,7 +75,7 @@ public class PlayerTopDown : MonoBehaviour
         // ВАША ЛОГИКА, КОТОРАЯ БЫЛА СОХРАНЕНА
         if (isMoving)
             lastMoveDir = moveInput;
-
+ 
         // --- Update Animator parameters ---
         if (animator)
         {
@@ -67,22 +85,21 @@ public class PlayerTopDown : MonoBehaviour
         }
     }
 
-    void TogglePhone()
-    {
-        isPhoneOpen = !isPhoneOpen;
+    // void TogglePhone()
+    // {
+    //    isPhoneOpen = !isPhoneOpen;
 
-        // ИЗМЕНЕНО: Управляем параметром в Аниматоре
-        if (phoneAnimator != null)
-        {
-            phoneAnimator.SetBool("IsOpen", isPhoneOpen);
-        }
+    // if (phoneAnimator != null)
+    //     phoneAnimator.SetBool("IsOpen", isPhoneOpen);
 
-        // Показываем или прячем курсор мыши
-        Cursor.visible = isPhoneOpen;
-        
-        // Разблокируем или блокируем курсор
-        Cursor.lockState = isPhoneOpen ? CursorLockMode.None : CursorLockMode.Locked;
-    }
+    // // Only touch the cursor in top-down scenes
+    // if (!SceneManager.GetActiveScene().name.Contains("HallWay") &&
+    //     !SceneManager.GetActiveScene().name.Contains("FP"))
+    // {
+    //     Cursor.visible = isPhoneOpen;
+    //     Cursor.lockState = isPhoneOpen ? CursorLockMode.None : CursorLockMode.Locked;
+    // }
+    // }
 
     void FixedUpdate()
     {

@@ -5,16 +5,30 @@ public class PlayerRenderControl : MonoBehaviour
 {
     private SpriteRenderer sr;
 
-    void Start()
+    void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
-        UpdateRenderVisibility();
-
-        // Subscribe to scene changes so it updates automatically
-        SceneManager.activeSceneChanged += OnSceneChanged;
     }
 
-    void OnSceneChanged(Scene oldScene, Scene newScene)
+    void OnEnable()
+    {
+        // Subscribe when enabled
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        // Unsubscribe when disabled
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void Start()
+    {
+        UpdateRenderVisibility(); // also run at startup
+    }
+
+    // Called after a scene is fully loaded and ready
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         UpdateRenderVisibility();
     }
@@ -23,14 +37,10 @@ public class PlayerRenderControl : MonoBehaviour
     {
         string sceneName = SceneManager.GetActiveScene().name;
 
-        // Example: only hide player in first-person scenes
+        // Hide player sprite in first-person scenes
         if (sceneName.Contains("HallWay") || sceneName.Contains("FP"))
-        {
-            sr.enabled = false;  // Hide sprite/model
-        }
+            sr.enabled = false;
         else
-        {
-            sr.enabled = true;   // Show sprite/model
-        }
+            sr.enabled = true;
     }
 }

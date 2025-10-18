@@ -7,10 +7,11 @@ public class CursorInteraction : MonoBehaviour
     public Sprite pickUpCursor;
     public Sprite doorCursor;      // Cursor sprite when hovering over a door
     private SpriteRenderer cursorRenderer;
-    public Sprite dragCursor; 
+    public Sprite dragCursor;
 
     [Header("Scene transitions")]
     public string KitchenScene = "Kitchen"; // Scene to load
+    public string DoorExitHallway = "ExitHallway";
     // You can add more scene names later for other doors
 
     void Start()
@@ -38,6 +39,14 @@ public class CursorInteraction : MonoBehaviour
             {
                 cursorRenderer.sprite = pickUpCursor;
             }
+            else if (hit.collider.CompareTag("DoorToExit"))
+            {
+                cursorRenderer.sprite = doorCursor;
+            }
+            else if (hit.collider.CompareTag("StairsDown"))
+            {
+                cursorRenderer.sprite = doorCursor;
+            }
             else
             {
                 cursorRenderer.sprite = defaultCursor;
@@ -59,6 +68,10 @@ public class CursorInteraction : MonoBehaviour
                 Debug.Log("Clicked on the Door! Moving to Kitchen...");
                 SceneManager.LoadScene(KitchenScene);
             }
+            else if (hit.collider.CompareTag("DoorToExit"))
+            {
+                SceneManager.LoadScene(DoorExitHallway);
+            }
             else if (hit.collider.CompareTag("Curtain"))
             {
                 var curtain = hit.collider.GetComponent<CurtainInteraction>();
@@ -67,7 +80,7 @@ public class CursorInteraction : MonoBehaviour
             }
             else if (hit.collider.CompareTag("Notebook"))
             {
-                  Debug.Log("NotebookPickedUp");
+                Debug.Log("NotebookPickedUp");
 
                 // Find player and add the item
                 GameObject player = GameObject.FindWithTag("Player");
@@ -81,6 +94,17 @@ public class CursorInteraction : MonoBehaviour
                 }
 
                 Destroy(hit.collider.gameObject);
+            }
+            else if (hit.collider.CompareTag("StairsDown"))
+            {
+
+            }
+            else if (hit.collider.CompareTag("OldMan"))
+            {
+                Debug.Log("Clicked OldMan");
+            var npc = hit.collider.GetComponent<OldManDialogue>();
+            if (npc != null)
+                npc.StartDialogue();
             }
         }
     }
