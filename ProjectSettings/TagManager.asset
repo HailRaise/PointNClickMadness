@@ -13,6 +13,10 @@ TagManager:
   - DoorToExit
   - StairsDown
   - OldMan
+  - Window
+  - npcOldMan
+  - WindowHouseLook
+  - GoBack
   layers:
   - Default
   - TransparentFX

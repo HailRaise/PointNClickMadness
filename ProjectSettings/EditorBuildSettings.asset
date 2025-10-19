@@ -6,23 +6,26 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/HouseScenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/Scenes/HouseInterior.unity
+    path: Assets/Scenes/HouseScenes/HouseInterior.unity
     guid: 35100fbca3e1d40129d77cc8146d5553
   - enabled: 1
-    path: Assets/Scenes/HallWay.unity
+    path: Assets/Scenes/HouseScenes/HallWay.unity
     guid: 2607f7f0686ba45648801c4748c191db
   - enabled: 1
-    path: Assets/Scenes/Kitchen.unity
+    path: Assets/Scenes/HouseScenes/Kitchen.unity
     guid: 4fd6bfd163b1846e293cc66f6e295254
   - enabled: 1
-    path: Assets/Scenes/FP_ExitHallway.unity
+    path: Assets/Scenes/HouseScenes/FP_ExitHallway.unity
     guid: a5a72004a1b58274fb623c5f094fb6cc
   - enabled: 1
-    path: Assets/Scenes/FP_HouseExit.unity
+    path: Assets/Scenes/HouseScenes/FP_HouseExit.unity
     guid: 7613894167f13594cb40d7a415d4607c
+  - enabled: 1
+    path: Assets/Scenes/HouseScenes/FP_WindowLook.unity
+    guid: 06e1401e0373d014da523e3c99eb47bf
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

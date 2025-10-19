@@ -36,7 +36,7 @@ public class DialogueManager : MonoBehaviour
         dialogueBox.SetActive(false);
     }
 
-    public void StartDialogue(DialogueNode[] dialogue, AudioClip npcBlip)
+    public void StartDialogue(DialogueNode[] dialogue, AudioClip npcBlip, string npcID)
     {
        dialogueBox.SetActive(true);
         currentDialogue = dialogue;
@@ -48,6 +48,8 @@ public class DialogueManager : MonoBehaviour
         Debug.Log("Blip sound set to: " + (npcBlip != null ? npcBlip.name : "NULL"));
 
         isDialogueActive = true;
+        if (GameState.Instance != null)
+        GameState.Instance.MarkTalkedTo(npcID);
         DisplayNode();
     }
 
@@ -89,11 +91,11 @@ public class DialogueManager : MonoBehaviour
     {
     dialogueText.text += c;
     letterCount++;
-    Debug.Log("Typed: " + c + "  Count: " + letterCount);
+    //Debug.Log("Typed: " + c + "  Count: " + letterCount);
 
     if (blipSound != null)
     {
-        Debug.Log("Playing blip...");
+        //Debug.Log("Playing blip...");
         blipSound.volume = 0.5f;
         blipSound.pitch = Random.Range(0.7f, 1.0f);
         blipSound.PlayOneShot(blipSound.clip);

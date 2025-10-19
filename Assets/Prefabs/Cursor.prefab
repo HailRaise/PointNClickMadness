@@ -10,8 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4632031030534439947}
   - component: {fileID: 7143417102076489016}
-  - component: {fileID: 4706111899820299304}
   - component: {fileID: 8208522787099933626}
+  - component: {fileID: 8182443190899780903}
+  - component: {fileID: 5988564241335939465}
+  - component: {fileID: 8210745976836351281}
   m_Layer: 0
   m_Name: Cursor
   m_TagString: Untagged
@@ -92,24 +94,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4706111899820299304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5890204071163371346}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f5b621d2c1e646af97cebecaf04e07f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CursorInteraction
-  defaultCursor: {fileID: -5565395274239018495, guid: 5ae6d81b33e4144d88f54628cae68a50, type: 3}
-  pickUpCursor: {fileID: 5119971492981962814, guid: 387f401232b504ccebdb83734fe0474a, type: 3}
-  doorCursor: {fileID: 7829212896737242494, guid: 5ae6d81b33e4144d88f54628cae68a50, type: 3}
-  dragCursor: {fileID: 3849239777459309627, guid: e91ca7b0e869047e99ae9e270899331e, type: 3}
-  KitchenScene: Kitchen
-  DoorExitHallway: ExitHallway
 --- !u!114 &8208522787099933626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,3 +106,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85cfa90caa1c24c34958b404581cb868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CursorFollow
+--- !u!114 &8182443190899780903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5890204071163371346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad4d3cc22e9f303439f2d8ce2e21049f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CursorManager
+  defaultCursor: {fileID: -5565395274239018495, guid: 5ae6d81b33e4144d88f54628cae68a50, type: 3}
+  doorCursor: {fileID: 1618129922804063390, guid: 5ae6d81b33e4144d88f54628cae68a50, type: 3}
+  lookCursor: {fileID: -6361271296530862326, guid: 5ae6d81b33e4144d88f54628cae68a50, type: 3}
+  pickUpCursor: {fileID: 5119971492981962814, guid: 387f401232b504ccebdb83734fe0474a, type: 3}
+  goBackCursor: {fileID: 7570373138001982034, guid: c73c1edb71d6446b4a7e1e76d041708b, type: 3}
+  dragCursor: {fileID: -8592353702636031272, guid: 5ae6d81b33e4144d88f54628cae68a50, type: 3}
+  walkCursor: {fileID: 7926631094506107384, guid: 437dc40e26b1f4f61a59e4778a2a32b1, type: 3}
+  dialogueCursor: {fileID: -1001214729499911652, guid: 82877e6f2f60f493eb54db0b2b3e05e6, type: 3}
+--- !u!114 &5988564241335939465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5890204071163371346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 160c8425af6e96a45abdb34dff223f7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneTransitioner
+  transitionSound: {fileID: 0}
+--- !u!114 &8210745976836351281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5890204071163371346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b213e3fe4d505a4498003e7be0c20f37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneInteractionHandler
